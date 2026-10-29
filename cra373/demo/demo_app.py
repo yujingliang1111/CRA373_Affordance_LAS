@@ -34,10 +34,22 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         url = urlparse(self.path)
         if url.path == "/":
+            html = HTML
+            if parse_qs(url.query).get("snapshot") == ["1"]:
+                with _live_lock:
+                    payload = _live_payload
+                if payload is None:
+                    self.send_error(503, "Waiting for an Isaac Sim frame")
+                    return
+                # Freeze one real published frame so a browser capture shows all six cards.
+                safe_json = payload.replace(b"<", b"\\u003c")
+                script = b"<script>window.__cra373Snapshot=" + safe_json + b"</script>"
+                html = HTML.replace(b"<!-- SNAPSHOT_SCRIPT -->", script, 1)
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(html)))
             self.end_headers()
-            self.wfile.write(HTML)
+            self.wfile.write(html)
         elif url.path == "/api/live":
             with _live_lock:
                 payload = _live_payload

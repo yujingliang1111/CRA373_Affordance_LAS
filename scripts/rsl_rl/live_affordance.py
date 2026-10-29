@@ -32,6 +32,14 @@ parser.add_argument("--dashboard-host", default="127.0.0.1")
 parser.add_argument("--no-browser", action="store_true", help="Do not open the dashboard browser window")
 parser.add_argument("--frames", type=int, default=0, help="Stop after N simulation frames; zero runs until the viewport closes")
 parser.add_argument("--publish-every", type=int, default=5, help="Publish one dashboard frame per N simulation steps")
+parser.add_argument("--terrain-scene", choices=("showcase", "rough"), default="showcase",
+                    help="Three-tile rough/stairs/gap showcase or the previous all-rough terrain")
+parser.add_argument("--terrain-focus", choices=("rough", "stairs", "gap"), default="stairs",
+                    help="First tile scanned by the robot in showcase mode")
+parser.add_argument("--showcase-camera", choices=("overview", "follow"), default="overview",
+                    help="Show all three tiles or follow the robot closely")
+parser.add_argument("--showcase-cycle-seconds", type=float, default=6.0,
+                    help="Seconds between switching showcase tiles; 0 keeps the selected focus")
 parser.add_argument("--control", choices=("flat-ppo", "neutral"), default="flat-ppo",
                     help="Existing flat PPO actor playback or neutral joint offsets")
 parser.add_argument("--checkpoint", type=Path,
@@ -52,6 +60,8 @@ if args.publish_every < 1 or args.frames < 0:
     parser.error("--publish-every must be positive and --frames must be nonnegative")
 if not 0 <= args.dashboard_port <= 65535:
     parser.error("--dashboard-port must be 0..65535")
+if args.showcase_cycle_seconds < 0:
+    parser.error("--showcase-cycle-seconds must be nonnegative")
 class _PendingDashboardHandler(BaseHTTPRequestHandler):
     """Used only while the socket is reserved before the real handler loads."""
     def do_GET(self):
@@ -87,6 +97,7 @@ from cra373.affordance.terrain_affordance import estimate_affordance
 from cra373.affordance.traversability_viz import TraversabilityVizConfig, make_marker_frame
 from cra373.demo.viewport_traversability import ViewportTraversability
 from cra373.demo.flat_policy import FlatPPOPolicy
+from cra373.demo.showcase_terrain import FEATURES, configure_live_terrain, set_showcase_focus
 
 
 def _to_numpy(tensor) -> np.ndarray:
@@ -110,24 +121,16 @@ def main() -> None:
     cfg.scene.num_envs = 1
     cfg.scene.env_spacing = 3.0
     cfg.seed = 373
-    cfg.terrain.max_init_terrain_level = 1
-    if cfg.terrain.terrain_generator is not None:
-        terrain = cfg.terrain.terrain_generator
-        # The stock rough generator mixes stairs, boxes, slopes, and random roughness.
-        # Select only the height field so every visible tile is genuinely uneven.
-        rough = terrain.sub_terrains["random_rough"]
-        rough.proportion = 1.0
-        rough.noise_range = (0.02, 0.10)
-        rough.noise_step = 0.02
-        terrain.sub_terrains = {"random_rough": rough}
-        terrain.num_rows = 3
-        terrain.num_cols = 3
-        terrain.curriculum = False
-        terrain.seed = 373
-    cfg.viewer.eye = (3.0, 3.0, 2.2)
-    cfg.viewer.lookat = (0.0, 0.0, 0.25)
-    cfg.viewer.origin_type = "asset_root"
-    cfg.viewer.asset_name = "robot"
+    configure_live_terrain(cfg, args.terrain_scene)
+    if args.terrain_scene == "showcase" and args.showcase_camera == "overview":
+        cfg.viewer.eye = (7.0, 9.0, 10.0)
+        cfg.viewer.lookat = (0.0, 1.5, 0.2)
+        cfg.viewer.origin_type = "world"
+    else:
+        cfg.viewer.eye = (3.0, 3.0, 2.2)
+        cfg.viewer.lookat = (0.0, 0.0, 0.25)
+        cfg.viewer.origin_type = "asset_root"
+        cfg.viewer.asset_name = "robot"
 
     env = None
     server = reserved_dashboard
@@ -151,7 +154,13 @@ def main() -> None:
                 subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             except OSError as exc:
                 print(f"[LIVE] Browser could not open automatically: {exc}. Open {url}", flush=True)
-        obs, _ = env.reset()
+        active_feature = args.terrain_focus if args.terrain_scene == "showcase" else "rough"
+        if args.terrain_scene == "showcase":
+            set_showcase_focus(env, active_feature)
+            print("[LIVE] Showcase tiles: rough | stairs | gap; "
+                  f"initial scan: {active_feature}", flush=True)
+        with torch.inference_mode():
+            obs, _ = env.reset()
         if args.control == "flat-ppo":
             policy = FlatPPOPolicy(args.checkpoint, env.unwrapped.device)
             print(f"[LIVE] Existing flat PPO actor: {policy.checkpoint} "
@@ -164,7 +173,18 @@ def main() -> None:
                   "(green/yellow/red; gray unknown has no surface hit and is omitted)", flush=True)
         step = 0
         next_viz_time_s = 0.0
+        next_cycle_time_s = args.showcase_cycle_seconds
+        showcase_switch_pending = False
         while simulation_app.is_running() and (args.frames == 0 or step < args.frames):
+            if (args.terrain_scene == "showcase" and args.showcase_cycle_seconds > 0
+                    and step * env.unwrapped.step_dt >= next_cycle_time_s):
+                active_feature = FEATURES[(FEATURES.index(active_feature) + 1) % len(FEATURES)]
+                set_showcase_focus(env, active_feature)
+                with torch.inference_mode():
+                    obs, _ = env.reset()
+                next_cycle_time_s += args.showcase_cycle_seconds
+                showcase_switch_pending = True
+                print(f"[LIVE] Showcase scan switched to {active_feature}", flush=True)
             # Affordance recommendations never enter the control stream.
             with torch.inference_mode():
                 actions = policy(obs["policy"]) if policy is not None else torch.zeros((1, 12), device=env.unwrapped.device)
@@ -186,6 +206,8 @@ def main() -> None:
                 timestamp_s=sim_time_s,
             )
             observation.metadata["live_step"] = step
+            observation.metadata["terrain_scene"] = args.terrain_scene
+            observation.metadata["terrain_feature"] = active_feature
             if not observation.valid.any():
                 if viewport is not None:
                     viewport.close()
@@ -207,11 +229,12 @@ def main() -> None:
                     "unknown_without_surface_hit": frame.undrawn_unknown_count,
                 }
                 publish_live(payload)
-                if step == args.publish_every or step % (args.publish_every * 50) == 0:
+                if step == args.publish_every or step % (args.publish_every * 50) == 0 or showcase_switch_pending:
                     print(f"[LIVE] step={step} valid={observation.valid.sum()}/{observation.valid.size} "
-                          f"recommendation={payload['reasoning']['selected_action']} "
+                          f"terrain={active_feature} recommendation={payload['reasoning']['selected_action']} "
                           f"markers={len(frame.positions_w_m) if viewport is not None else 0} "
                           f"heuristic_classes={np.bincount(frame.grid_categories.ravel(), minlength=4).tolist()}", flush=True)
+                    showcase_switch_pending = False
     except BaseException as exc:
         print(f"[LIVE ERROR] {type(exc).__name__}: {exc}", flush=True)
         traceback.print_exc()

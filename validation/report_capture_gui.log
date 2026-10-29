@@ -1,0 +1,515 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1793262719.226862   81765 descriptor_database.cc:633] File already exists in database: grpc/health/v1/health.proto
+W0000 00:00:1793262719.226900   81765 message.cc:301] Protobuf GeneratedMessageFactory: File is already registered: grpc/health/v1/health.proto
+Loading user config located at: '/home/dog101/miniconda3/envs/env_isaaclab_2/lib/python3.12/site-packages/isaacsim/kit/data/Kit/IsaacLab/3.0/user.config.json'
+2026-10-29T08:31:59Z [0ms] [Warning] [omni.ext.plugin] [ext: isaaclab_visualizers] Extensions config 'extension.toml' doesn't exist '/home/dog101/IsaacLab/source/isaaclab_visualizers' or '/home/dog101/IsaacLab/source/isaaclab_visualizers/config'
+[0.062s] [ext: omni.assets.plugins-0.0.0] startup
+[0.062s] [ext: omni.blobkey-1.1.2] startup
+[0.063s] [ext: omni.kit.async_engine-0.0.3] startup
+[0.127s] [ext: omni.client.lib-1.1.1] startup
+[0.135s] [ext: omni.client-1.3.0] startup
+[0.138s] [ext: omni.protobuf.lib-1.0.0] startup
+[0.138s] [ext: omni.grpc.lib-1.0.0] startup
+[0.141s] [ext: omni.metrics.core-0.0.3] startup
+[0.142s] [ext: omni.datastore-0.0.0] startup
+[0.142s] [ext: omni.gpu_foundation.shadercache.vulkan-1.0.0] startup
+[0.145s] [ext: omni.hsscclient-1.1.4] startup
+[0.145s] [ext: omni.stats-1.0.1] startup
+[0.145s] [ext: omni.ujitso.default-1.0.0] startup
+[0.147s] [ext: omni.gpu_foundation-0.0.0] startup
+[0.312s] [ext: carb.windowing.plugins-1.0.1] startup
+[0.319s] [ext: omni.kit.renderer.init-1.0.1] startup
+
+|---------------------------------------------------------------------------------------------|
+| Driver Version: 595.99.02     | Graphics API: Vulkan
+|=============================================================================================|
+| GPU | Name                             | Active | LDA | GPU Memory | Vendor-ID | LUID       |
+|     |                                  |        |     |            | Device-ID | UUID       |
+|     |                                  |        |     |            | Bus-ID    |            |
+|---------------------------------------------------------------------------------------------|
+| 0   | NVIDIA GeForce RTX 5070          | Yes: 0 |     | 12227   MB | 10de      | 0          |
+|     |                                  |        |     |            | 2f04      | 1afba9bd.. |
+|     |                                  |        |     |            | 1         |            |
+|=============================================================================================|
+| OS: 24.04.4 LTS (Noble Numbat) ubuntu, Version: 24.04.4, Kernel: 7.0.0-42-generic
+| XServer Vendor: The X.Org Foundation, XServer Version: 12101011 (1.21.1.11)
+| Processor: Intel(R) Core(TM) i7-14700
+| Bare Metal Cores: 20 | Bare Metal Logical Cores: 40
+| Available Cores:  28 
+|---------------------------------------------------------------------------------------------|
+| Total Memory (MB): 64057 | Free Memory: 55484
+| Total Page/Swap (MB): 8191 | Free Page/Swap: 8191
+|---------------------------------------------------------------------------------------------|
+2026-10-29T08:31:59Z [771ms] [Warning] [omni.rtx] CPU performance profile is set to powersave. This profile sets the CPU to the lowest frequency reducing performance.
+2026-10-29T08:31:59Z [799ms] [Warning] [omni.rtx] IOMMU is enabled.
+[0.918s] [ext: omni.kit.pipapi-0.0.0] startup
+[0.919s] [ext: omni.kit.telemetry-0.5.2] startup
+[0.937s] [ext: omni.kit.loop-isaac-1.6.0] startup
+[0.938s] [ext: omni.kit.test-2.0.7] startup
+[0.976s] [ext: omni.materialx.libs-1.0.9] startup
+[0.980s] [ext: omni.gpucompute.plugins-0.0.0] startup
+[0.981s] [ext: omni.usd.config-1.0.7] startup
+[0.983s] [ext: omni.usd.libs-1.0.3] startup
+[1.049s] [ext: omni.iray.libs-0.0.1] startup
+[1.052s] [ext: omni.mdl-57.0.3] startup
+[1.087s] [ext: omni.mdl.neuraylib-0.2.20] startup
+[1.088s] [ext: omni.kit.usd.mdl-1.1.9] startup
+[1.154s] [ext: omni.appwindow-1.2.2] startup
+[1.440s] [ext: omni.kit.renderer.core-1.2.2] startup
+[4.332s] [ext: omni.kit.renderer.capture-2.0.1] startup
+[4.334s] [ext: omni.kit.renderer.imgui-2.0.6] startup
+[4.369s] [ext: omni.ui-3.1.3] startup
+[4.377s] [ext: omni.kit.mainwindow-1.0.3] startup
+[4.377s] [ext: carb.audio-0.1.0] startup
+[4.380s] [ext: omni.uiaudio-1.0.0] startup
+[4.380s] [ext: omni.kit.uiapp-0.0.0] startup
+[4.380s] [ext: omni.usd.schema.metrics.assembler-110.1.0] startup
+[4.382s] [ext: omni.usd.schema.anim-0.0.1] startup
+[4.396s] [ext: omni.usd.schema.audio-0.0.1] startup
+[4.398s] [ext: omni.usd.schema.geospatial-0.0.1] startup
+[4.400s] [ext: omni.usd.schema.omnigraph-1.0.1] startup
+[4.405s] [ext: omni.usd.schema.semantics-0.0.0] startup
+[4.407s] [ext: omni.activity.core-1.0.3] startup
+[4.408s] [ext: omni.cubric-0.1.0] startup
+[4.408s] [ext: omni.graph.exec-0.9.6] startup
+[4.408s] [ext: omni.usd_resolver-1.0.0] startup
+[4.410s] [ext: omni.usd.core-1.8.3] startup
+[4.413s] [ext: omni.hydra.scene_delegate-0.3.5] startup
+[4.416s] [ext: usdrt.scenegraph-7.6.3] startup
+[4.434s] [ext: omni.hydra.usdrt_delegate-7.5.2] startup
+[4.438s] [ext: omni.inspect-1.0.2] startup
+[4.439s] [ext: omni.kit.actions.core-1.0.0] startup
+[4.440s] [ext: omni.kit.audiodeviceenum-1.0.2] startup
+[4.441s] [ext: omni.kit.commands-1.5.0] startup
+[4.443s] [ext: omni.kit.exec.core-0.13.5] startup
+[4.444s] [ext: omni.kit.usd_undo-0.1.8] startup
+[4.444s] [ext: omni.kit.window.popup_dialog-2.0.25] startup
+[4.446s] [ext: omni.kit.widget.nucleus_connector-2.3.1] startup
+[4.448s] [ext: omni.timeline-1.1.0] startup
+[4.449s] [ext: omni.usd-1.15.2] startup
+[4.475s] [ext: omni.graph.core-3.1.2] startup
+[4.477s] [ext: omni.kit.notification_manager-1.0.11] startup
+[4.478s] [ext: isaacsim.core.deprecation_manager-0.4.2] startup
+[4.479s] [ext: omni.usd.schema.mujoco-1.1.0] startup
+[4.479s] [ext: omni.usd.schema.newton-1.2.0] startup
+[4.480s] [ext: omni.usd.schema.physx-110.1.11] startup
+[4.503s] [ext: omni.kit.menu.core-1.2.0] startup
+[4.504s] [ext: omni.kit.menu.utils-2.2.3] startup
+[4.508s] [ext: omni.kit.usd.layers-2.6.1] startup
+[4.513s] [ext: omni.kit.primitive.mesh-1.1.0] startup
+[4.515s] [ext: omni.kit.stage_template.core-1.1.22] startup
+[4.515s] [ext: omni.kit.stage_templates-2.0.2] startup
+[4.516s] [ext: omni.usd.metrics.assembler-110.1.2] startup
+[4.518s] [ext: isaacsim.core.experimental.utils-0.17.1] startup
+[4.518s] [ext: omni.convexdecomposition-110.1.11] startup
+[4.520s] [ext: omni.physics-110.1.11] startup
+[4.522s] [ext: omni.physx.gpu-110.1.11] startup
+[4.522s] [ext: omni.physx.foundation-110.1.11] startup
+[4.523s] [ext: omni.usdphysics-110.1.11] startup
+[4.524s] [ext: omni.physx.cooking-110.1.11] startup
+[4.526s] [ext: omni.physx-110.1.11] startup
+[4.532s] [ext: omni.physics.physx-110.1.11] startup
+[4.534s] [ext: omni.physics.stageupdate-110.1.11] startup
+[4.535s] [ext: omni.physics.tensors-110.1.11] startup
+[4.538s] [ext: omni.physx.tensors-110.1.11] startup
+[4.541s] [ext: omni.usdex.libs-2.2.2] startup
+[4.547s] [ext: isaacsim.core.simulation_manager-1.15.4] startup
+2026-10-29T08:32:03Z [4,633ms] [Warning] [isaacsim.core.simulation_manager.plugin] USD stage is not available; stage-opened subscription is deferred
+2026-10-29T08:32:03Z [4,633ms] [Warning] [isaacsim.core.simulation_manager.plugin] USD stage is not available; stage-opened subscription is deferred
+[4.677s] [ext: isaacsim.core.experimental.primdata-0.3.2] startup
+[4.678s] [ext: isaacsim.robot.schema-6.3.6] startup
+[4.681s] [ext: isaacsim.robot_motion.schema-0.2.0] startup
+[4.681s] [ext: omni.kit.asset_converter-5.1.4] startup
+[4.689s] [ext: omni.usd.schema.omni_lens_distortion-1.0.0] startup
+[4.690s] [ext: omni.usd.schema.omni_projectors-1.0.0] startup
+[4.690s] [ext: omni.usd.schema.omni_sensors-0.0.0] startup
+[4.695s] [ext: omni.usd.schema.omniscripting-1.0.1] startup
+[4.698s] [ext: omni.usd.schema.physical_lighting-0.1.0] startup
+[4.700s] [ext: omni.usd.schema.render_settings.rtx-1.0.2] startup
+[4.702s] [ext: omni.usd.schema.usd_particle_field-1.0.0] startup
+[4.703s] [ext: omni.kit.clipboard-1.1.1] startup
+[4.703s] [ext: omni.kit.widget.context_menu-1.4.0] startup
+[4.704s] [ext: omni.kit.context_menu-1.9.0] startup
+[4.705s] [ext: omni.kit.helper.file_utils-0.1.10] startup
+[4.706s] [ext: omni.kit.hotkeys.core-1.3.12] startup
+[4.706s] [ext: omni.kit.widget.path_field-2.0.13] startup
+[4.707s] [ext: omni.kit.widget.browser_bar-2.0.10] startup
+[4.707s] [ext: omni.kit.widget.filebrowser-2.13.4] startup
+[4.710s] [ext: omni.kit.widget.options_menu-1.1.6] startup
+[4.712s] [ext: omni.kit.widget.filter-1.1.5] startup
+[4.712s] [ext: omni.kit.widget.options_button-1.0.3] startup
+[4.712s] [ext: omni.kit.widget.prompt-1.0.7] startup
+[4.713s] [ext: omni.kit.widget.searchfield-1.1.8] startup
+[4.713s] [ext: omni.ui.scene-2.0.1] startup
+[4.716s] [ext: omni.kit.window.filepicker-2.15.5] startup
+[4.725s] [ext: omni.kit.window.file_exporter-1.0.36] startup
+[4.726s] [ext: omni.kit.widget.stage-4.3.0] startup
+[4.731s] [ext: omni.kit.window.content_browser_registry-0.0.6] startup
+[4.732s] [ext: omni.kit.window.drop_support-1.0.8] startup
+[4.732s] [ext: omni.kit.window.file_importer-1.1.21] startup
+[4.732s] [ext: omni.kit.window.file-2.0.10] startup
+[4.734s] [ext: omni.kit.window.content_browser-3.1.8] startup
+[4.741s] [ext: omni.kit.widget.layers-1.9.2] startup
+[4.748s] [ext: isaaclab-6.1.17] startup
+[5.071s] [ext: isaaclab_contrib-0.4.4] startup
+[5.071s] [ext: isaacsim.core.version-2.1.0] startup
+[5.072s] [ext: isaacsim.app.about-2.3.0] startup
+[5.075s] [ext: isaacsim.asset.transformer-1.2.3] startup
+[5.077s] [ext: omni.scene.optimizer.core-110.1.0] startup
+[5.125s] [ext: isaacsim.asset.importer.utils-1.8.0] startup
+[5.126s] [ext: omni.kit.material.library-3.1.2] startup
+[5.129s] [ext: isaacsim.asset.transformer.rules-1.7.8] startup
+[5.136s] [ext: isaacsim.asset.importer.mjcf-3.10.0] startup
+[5.137s] [ext: isaacsim.asset.importer.urdf-3.11.0] startup
+[5.140s] [ext: isaacsim.core.cloner-1.7.2] startup
+[5.140s] [ext: isaacsim.test.docstring-1.3.1] startup
+[5.143s] [ext: isaacsim.core.experimental.prims-1.8.8] startup
+[5.157s] [ext: isaacsim.core.experimental.materials-0.7.0] startup
+[5.158s] [ext: isaacsim.core.experimental.objects-0.8.0] startup
+[5.197s] [ext: omni.hydra.engine.stats-1.0.5] startup
+[5.199s] [ext: omni.hydra.rtx.shadercache.vulkan-1.0.0] startup
+[5.200s] [ext: omni.index.libs-387500.3473.0] startup
+[5.200s] [ext: omni.index-1.0.1] startup
+[5.200s] [ext: omni.ujitso.client-0.0.0] startup
+[5.200s] [ext: omni.usd.schema.playback-1.0.0] startup
+[5.202s] [ext: omni.volume-0.5.2] startup
+[5.205s] [ext: omni.hydra.rtx-1.0.3] startup
+2026-10-29T08:32:04Z [5,173ms] [Warning] [omni.log] Source: omni.hydra was already registered.
+[5.229s] [ext: omni.kit.hydra_texture-1.6.0] startup
+[5.232s] [ext: omni.kit.raycast.query-1.2.0] startup
+[5.235s] [ext: omni.kit.viewport.legacy_gizmos-1.0.24] startup
+[5.237s] [ext: omni.kit.viewport.registry-104.0.6] startup
+[5.237s] [ext: omni.kit.viewport.scene_camera_model-1.0.7] startup
+[5.241s] [ext: omni.kit.widget.viewport-109.2.0] startup
+[5.243s] [ext: omni.kit.viewport.window-109.0.2] startup
+[5.252s] [ext: omni.kit.viewport.utility-2.0.1] startup
+[5.253s] [ext: isaacsim.core.rendering_manager-0.4.2] startup
+[5.264s] [ext: isaacsim.storage.native-1.9.2] startup
+[5.265s] [ext: omni.graph.tools-1.81.0] startup
+[5.279s] [ext: omni.graph-1.142.5] startup
+[5.304s] [ext: omni.graph.action_core-1.1.9] startup
+[5.306s] [ext: omni.graph.action_nodes_core-2.10.2] startup
+[5.308s] [ext: omni.graph.action_nodes-2.10.3] startup
+[5.331s] [ext: omni.graph.action-2.10.2] startup
+[5.332s] [ext: omni.graph.image.core-0.6.1] startup
+[5.333s] [ext: omni.graph.image.nodes-1.3.1] startup
+[5.333s] [ext: omni.graph.nodes_core-2.10.3] startup
+[5.340s] [ext: omni.graph.nodes-2.11.1] startup
+[5.345s] [ext: omni.kit.property.adapter.core-1.1.1] startup
+[5.347s] [ext: omni.kit.property.adapter.usd-1.0.5] startup
+[5.348s] [ext: omni.kit.widget.highlight_label-1.0.3] startup
+[5.349s] [ext: omni.kit.window.property-1.15.1] startup
+[5.358s] [ext: omni.kit.property.usd-4.8.1] startup
+[5.368s] [ext: omni.kit.widget.text_editor-1.1.1] startup
+[5.370s] [ext: omni.graph.scriptnode-2.10.2] startup
+[5.376s] [ext: omni.kit.widget.searchable_combobox-1.0.7] startup
+[5.377s] [ext: omni.kit.widget.settings-2.0.0] startup
+[5.378s] [ext: omni.kit.window.preferences-1.8.3] startup
+[5.382s] [ext: omni.kit.viewport.menubar.core-107.2.2] startup
+[5.390s] [ext: omni.syntheticdata-0.6.15] startup
+[5.412s] [ext: omni.replicator.nv-1.1.1] startup
+[5.418s] [ext: omni.videoencoding-0.2.1] startup
+[5.420s] [ext: omni.replicator.core-1.13.25] startup
+2026-10-29T08:32:04Z [5,385ms] [Warning] [pxr.Semantics] pxr.Semantics is deprecated - please use Semantics instead
+2026-10-29T08:32:04Z [5,443ms] [Warning] [omni.replicator.core.scripts.extension] No material configuration file, adding configuration to material settings directly.
+[5.604s] [ext: isaacsim.core.nodes-5.10.4] startup
+[5.628s] [ext: isaacsim.core.throttling-2.3.3] startup
+[5.629s] [ext: omni.kit.manipulator.viewport-107.0.1] startup
+[5.631s] [ext: omni.graph.visualization.nodes-2.1.4] startup
+[5.645s] [ext: omni.kit.window.extensions-1.5.7] startup
+[5.649s] [ext: isaacsim.gui.components-1.8.4] startup
+[5.652s] [ext: isaacsim.examples.base-1.3.1] startup
+[5.654s] [ext: omni.kit.widget.zoombar-1.0.7] startup
+[5.654s] [ext: omni.kit.browser.core-2.3.18] startup
+[5.657s] [ext: omni.kit.browser.folder.core-2.0.2] startup
+[5.660s] [ext: omni.kit.widget.stage_icons-1.0.8] startup
+[5.661s] [ext: omni.kit.window.stage-2.6.1] startup
+[5.663s] [ext: omni.kit.menu.stage-1.2.7] startup
+[5.664s] [ext: omni.kit.usd.collect-3.0.5] startup
+[5.666s] [ext: omni.kit.tool.collect-2.2.19] startup
+[5.668s] [ext: isaacsim.examples.browser-0.3.1] startup
+[5.670s] [ext: isaacsim.gui.property-1.6.2] startup
+[5.675s] [ext: omni.behavior.scripting.core-110.1.0] startup
+[5.677s] [ext: isaacsim.replicator.behavior-1.5.3] startup
+[5.677s] [ext: isaacsim.robot.policy.examples-5.2.11] startup
+[5.692s] [ext: isaacsim.sensors.experimental.physics-3.0.1] startup
+[5.698s] [ext: omni.sensors.net-1.0.1] startup
+[5.700s] [ext: omni.sensors.nv.common-3.0.0] startup
+[5.709s] [ext: omni.sensors.nv.materials-2.0.0] startup
+[5.711s] [ext: omni.sensors.nv.acoustic-3.0.0] startup
+[5.713s] [ext: omni.sensors.nv.ids-2.0.1] startup
+[5.715s] [ext: omni.sensors.nv.lidar-3.0.0] startup
+[5.718s] [ext: omni.sensors.nv.radar-3.0.0] startup
+[5.720s] [ext: isaacsim.sensors.experimental.rtx-1.4.3] startup
+[5.894s] [ext: isaacsim.simulation_app-2.18.3] startup
+[5.895s] [ext: isaacsim.util.debug_draw-3.2.2] startup
+[5.900s] [ext: omni.anim.curve.core-1.6.0] startup
+[5.908s] [ext: omni.asset_validator.core-1.19.3] startup
+[5.969s] [ext: omni.debugdraw-0.1.4] startup
+[5.972s] [ext: omni.graph.ui_nodes-2.10.5] startup
+[5.994s] [ext: omni.hydra.scene_api-0.1.3] startup
+[5.998s] [ext: omni.kit.manipulator.camera-110.0.0] startup
+[6.003s] [ext: omni.kit.manipulator.selector-1.1.4] startup
+[6.004s] [ext: omni.kit.manipulator.transform-107.0.0] startup
+[6.007s] [ext: omni.kit.widget.toolbar-2.1.0] startup
+[6.012s] [ext: omni.kit.manipulator.tool.snap-1.5.14] startup
+[6.014s] [ext: omni.kit.viewport.manipulator.transform-107.0.4] startup
+[6.016s] [ext: omni.kit.manipulator.prim.core-108.0.2] startup
+[6.020s] [ext: omni.kit.manipulator.prim.usd-107.0.3] startup
+[6.021s] [ext: omni.kit.manipulator.prim-108.0.0] startup
+[6.021s] [ext: omni.kit.manipulator.selection-109.0.1] startup
+[6.022s] [ext: omni.kit.menu.create-2.0.2] startup
+[6.023s] [ext: omni.kit.property.audio-1.0.16] startup
+[6.025s] [ext: omni.kit.property.camera-1.0.14] startup
+[6.026s] [ext: omni.kit.property.geometry-2.1.2] startup
+[6.029s] [ext: omni.kit.property.light-1.0.14] startup
+2026-10-29T08:32:05Z [6,006ms] [Warning] [omni.usd] Encountered USD Warnings but USD Diagnostics are currently muted. To view USD Warnings, please set the '/persistent/app/usd/muteUsdDiagnostics' setting to false in Preferences page.
+[6.054s] [ext: omni.kit.property.material-1.14.2] startup
+[6.058s] [ext: omni.kit.property.render-1.2.2] startup
+[6.059s] [ext: omni.kit.property.transform-1.6.9] startup
+[6.062s] [ext: omni.kit.property.bundle-1.5.1] startup
+[6.063s] [ext: omni.kit.viewport.actions-107.0.2] startup
+[6.065s] [ext: omni.kit.viewport.menubar.display-107.1.3] startup
+[6.067s] [ext: omni.physx.commands-110.1.11] startup
+[6.069s] [ext: omni.usdphysics.ui-110.1.11] startup
+[6.086s] [ext: omni.physx.ui-110.1.11] startup
+[6.102s] [ext: omni.kit.property.physics-110.1.11] startup
+[6.111s] [ext: omni.kit.stagerecorder.core-110.0.9] startup
+[6.114s] [ext: omni.kit.stagerecorder.ui-110.0.0] startup
+[6.116s] [ext: omni.kit.stWarning: Possible version incompatibility. Attempting to load omni::fabric::IStageReaderWriter with version v0.16 against v0.14.
+agerecorder.bundle-110.0.0] startup
+[6.116s] [ext: omni.kit.usdz_export-1.1.0] startup
+[6.118s] [ext: omni.kit.tool.asset_importer-5.2.0] startup
+[6.121s] [ext: omni.kit.ui.actions-1.0.5] startup
+[6.123s] [ext: omni.ui_query-1.1.10] startup
+[6.123s] [ext: omni.kit.ui_test-1.4.4] startup
+[6.124s] [ext: omni.kit.viewport.menubar.camera-107.0.10] startup
+[6.128s] [ext: omni.kit.viewport.menubar.lighting-107.3.2] startup
+[6.130s] [ext: omni.kit.viewport.menubar.render-107.0.10] startup
+[6.131s] [ext: omni.kit.viewport.menubar.settings-110.0.1] startup
+[6.134s] [ext: omni.kit.window.console-1.1.8] startup
+[6.136s] [ext: omni.kit.window.script_editor-2.0.7] startup
+[6.138s] [ext: omni.kit.window.status_bar-0.1.11] startup
+[6.140s] [ext: omni.kit.window.toolbar-3.0.3] startup
+[6.142s] [ext: omni.ocio-0.1.1] startup
+[6.143s] [ext: omni.physics.isaacsimready-110.1.11] startup
+[6.146s] [ext: omni.physics.physx.ui-110.1.11] startup
+[6.164s] [ext: omni.physics.ui-110.1.11] startup
+[6.167s] [ext: omni.physx.asset_validator-110.1.11] startup
+[6.171s] [ext: omni.physx.demos-110.1.11] startup
+[6.182s] [ext: omni.physx.vehicle-110.1.11] startup
+[6.194s] [ext: omni.physx.camera-110.1.11] startup
+[6.201s] [ext: omni.physx.cct-110.1.11] startup
+[6.218s] [ext: omni.physx.graph-110.1.11] startup
+[6.242s] [ext: omni.physx.supportui-110.1.11] startup
+[6.251s] [ext: omni.physx.bundle-110.1.11] startup
+[6.251s] [ext: omni.replicator.replicator_yaml-2.0.12] startup
+[6.258s] [ext: omni.rtx.window.settings-0.8.0] startup
+[6.261s] [ext: omni.rtx.settings.core-0.7.0] startup
+[6.263s] [ext: omni.usd.metrics.assembler.ui-110.1.1] startup
+[6.269s] [ext: semantics.schema.editor-2.0.2] startup
+[6.271s] [ext: semantics.schema.property-2.0.1] startup
+[6.273s] [ext: isaaclab_assets-0.3.5] startup
+[7.203s] [ext: isaaclab_tasks-1.10.9] startup
+[7.226s] [ext: isaaclab_mimic-1.3.4] startup
+[7.226s] [ext: isaaclab_newton-0.13.6] startup
+[7.227s] [ext: isaaclab_physx-1.1.3] startup
+[7.227s] [ext: isaaclab_rl-0.5.7] startup
+[7.227s] [ext: omni.kit.menu.common-2.0.2] startup
+[7.228s] [ext: isaaclab.python-3.0.0] startup
+[7.229s] Simulation App Starting
+2026-10-29T08:32:07Z [8,004ms] [Warning] [rtx.hydra] RenderDelegate : Warning /rtx/hydra/readTransformsFromFabricInRenderDelegate and geometry streaming are enabled together but this can cause issues with dynamic objects not streaming correctly due to problems in the transform update.
+[8.264s] Simulation App Startup Complete
+[8.278s] app ready
+[ISAACLAB] AppLauncher initialization complete
+[INFO]: Base environment:
+	Environment device    : cuda:0
+	Environment seed      : 373
+	Physics step-size     : 0.005
+	Rendering step-size   : 0.02
+	Environment step-size : 0.02
+[INFO]: Registered backend 'physx' for factory Articulation.
+[INFO]: Registered backend 'physx' for factory ContactSensor.
+[INFO]: Registered backend 'physx' for factory RayCaster.
+[INFO] Generating terrains based on curriculum took Last: 0.200412 s
+[INFO]: Time taken for scene creation Last: 0.334485 s, Mean: 0.334485 s, Std: 0.000000 s, N: 1
+[INFO]: Scene manager:  <class InteractiveScene>
+	Number of environments: 1
+	Environment spacing   : 3.0
+	Source prim name      : /World/envs/env_0
+	Global prim paths     : []
+	Replicate physics     : True
+[INFO]: Starting the simulation. This may take a few seconds. Please wait...
+[INFO]: Simulation parameters for joints in /World/envs/env_.*/Robot:
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                                  Simulation Joint Information (Prim path: /World/envs/env_.*/Robot)                                                 |
++-------+----------------+-----------+---------+----------+-----------------+------------------+------------------+-----------------+-----------------+---------------+
+| Index | Name           | Stiffness | Damping | Armature | Static Friction | Dynamic Friction | Viscous Friction | Position Limits | Velocity Limits | Effort Limits |
++-------+----------------+-----------+---------+----------+-----------------+------------------+------------------+-----------------+-----------------+---------------+
+|   0   | FL_hip_joint   |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 1.571] |      20.000     |     30.000    |
+|   1   | FR_hip_joint   |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 1.571] |      20.000     |     30.000    |
+|   2   | RL_hip_joint   |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 1.571] |      20.000     |     30.000    |
+|   3   | RR_hip_joint   |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 1.571] |      20.000     |     30.000    |
+|   4   | FL_thigh_joint |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 0.785] |      20.000     |     30.000    |
+|   5   | FR_thigh_joint |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 0.785] |      20.000     |     30.000    |
+|   6   | RL_thigh_joint |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 0.785] |      20.000     |     30.000    |
+|   7   | RR_thigh_joint |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 0.785] |      20.000     |     30.000    |
+|   8   | FL_calf_joint  |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.082, 1.082] |      20.000     |     30.000    |
+|   9   | FR_calf_joint  |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.082, 1.082] |      20.000     |     30.000    |
+|   10  | RL_calf_joint  |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.082, 1.082] |      20.000     |     30.000    |
+|   11  | RR_calf_joint  |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.082, 1.082] |      20.000     |     30.000    |
++-------+----------------+-----------+---------+----------+-----------------+------------------+------------------+-----------------+-----------------+---------------+
+[INFO]: Read mesh prim: /World/ground/terrain/mesh with 1965 vertices and 10848 faces.
+[INFO]: Registered backend 'kit' for factory Visualizer.
+[INFO]: Time taken for simulation start Last: 3.969151 s, Mean: 3.969151 s, Std: 0.000000 s, N: 1
+[INFO] Event Manager:  <EventManager> contains 1 active terms.
++--------------------------------------+
+| Active Event Terms in Mode: 'startup' |
++----------+---------------------------+
+|  Index   | Name                      |
++----------+---------------------------+
+|    0     | physics_material          |
+|    1     | add_base_mass             |
++----------+---------------------------+
+
+[INFO]: Completed setting up the environment...
+[LIVE] Isaac Sim viewport and terrain dashboard: http://127.0.0.1:7860/?mode=live
+[LIVE] Showcase tiles: rough | stairs | gap; initial scan: stairs
+[LIVE] Neutral joint-offset control
+[LIVE] Heuristic traversability overlay enabled at 10 Hz (green/yellow/red; gray unknown has no surface hit and is omitted)
+[LIVE] step=5 valid=187/187 terrain=stairs recommendation=Avoid markers=187 heuristic_classes=[40, 49, 98, 0]
+[LIVE] Showcase scan switched to gap
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:85: RuntimeWarning: invalid value encountered in add
+  x = c * delta[:, 0] + s * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+[LIVE] step=155 valid=132/187 terrain=gap recommendation=Stop markers=132 heuristic_classes=[108, 24, 0, 55]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:85: RuntimeWarning: invalid value encountered in add
+  x = c * delta[:, 0] + s * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:85: RuntimeWarning: invalid value encountered in add
+  x = c * delta[:, 0] + s * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+[LIVE] step=250 valid=120/187 terrain=gap recommendation=Stop markers=120 heuristic_classes=[88, 32, 0, 67]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+/home/dog101/CRA373_new/CRA373_Affordance_LAS/cra373/affordance/terrain_observation.py:86: RuntimeWarning: invalid value encountered in add
+  y = -s * delta[:, 0] + c * delta[:, 1]
+[LIVE] Showcase scan switched to rough
+[LIVE] step=305 valid=187/187 terrain=rough recommendation=Slow Walk markers=187 heuristic_classes=[24, 153, 10, 0]
+[INFO]: SimulationContext cleared
+2026-10-29T08:32:07Z [8,625ms] [Warning] [isaaclab_physx.physics.physx_manager] TGS solver with enable_external_forces_every_iteration=False may cause noisy velocities.
+[8.675s] [ext: omni.warp.core-1.13.0] startup
+[8.680s] [ext: omni.physx.fabric-110.1.11] startup
+2026-10-29T08:32:08Z [9,563ms] [Warning] [omni.fabric.plugin] Warning: attribute material:binding not found for path /__Prototype_6911154371460757009/FR_foot
+
+2026-10-29T08:32:12Z [13,053ms] [Warning] [omni.fabric.plugin] Unsupported type encountered during VtValue extraction
+2026-10-29T08:32:12Z [13,053ms] [Warning] [omni.fabric.plugin] Attempting to set an invalid data source to array attribute
+
+[25.353s] Simulation App Shutting Down

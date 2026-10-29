@@ -6,7 +6,7 @@
 </style></head><body>
 <header><h1>CRA373 Terrain Affordance Lab</h1><p>Geometry-based scanner reasoning • synthetic offline scenes • no trained LAS model</p>
 <label>Terrain scenario <select id="scenario"><option>Live Isaac Sim</option><option>Flat</option><option>Rough</option><option>Raised step</option><option>Known gap</option></select></label>
-<p class="muted">Grid: +x forward (up), +y left. Cell size 0.1 m. Heuristic thresholds require CRA373 validation.</p></header>
+<p class="muted">Grid: +x forward (up), +y left. Cell size 0.1 m. Heuristic thresholds require CRA373 validation.</p><p id="terrain-feature" class="muted"></p></header>
 <main class="grid">
 <section class="card"><h2>1 · Terrain observation</h2><canvas id="height" width="330" height="510"></canvas><p id="source" class="muted"></p></section>
 <section class="card"><h2>2 · Affordance grounding</h2><canvas id="affordance" width="330" height="510"></canvas><p class="legend"><span><i class="swatch" style="background:#25a55b"></i>Foothold</span><span><i class="swatch" style="background:#9dd5ac"></i>Traversable</span><span><i class="swatch" style="background:#f5a623"></i>Obstacle / transition</span><span><i class="swatch" style="background:#9b49ad"></i>Known gap</span><span><i class="swatch" style="background:#697680"></i>Unknown</span></p></section>
@@ -15,6 +15,7 @@
 <section class="card wide" id="traversability-card" style="display:none"><h2>5 · Heuristic Traversability Mode</h2><canvas id="traversability" width="330" height="510"></canvas><p class="legend"><span><i class="swatch" style="background:#15d933"></i>Green ≥ 0.7</span><span><i class="swatch" style="background:#ffb80f"></i>Yellow ≥ 0.4</span><span><i class="swatch" style="background:#f21a17"></i>Red &lt; 0.4</span><span><i class="swatch" style="background:#8c949f"></i>Gray unknown</span></p><p id="traversability-note" class="muted"></p></section>
 <section class="card wide"><h2>6 · Latent action space</h2><p id="las"></p><p class="muted">No random latent vector is shown. A paired PPO action dataset, trained autoencoder and affordance mapper are required.</p><p id="latency"></p></section>
 </main>
+<!-- SNAPSHOT_SCRIPT -->
 <script>
 const sel=document.getElementById("scenario");
 function draw(canvasId, data, colors) {
@@ -42,9 +43,13 @@ function render(d){
   if(t){
     const colors=["#15d933","#ffb80f","#f21a17","#8c949f"];
     draw("traversability",t.categories,(v)=>colors[v]||colors[3]);
-    document.getElementById("traversability-note").textContent=t.mode+" · geometry only, not a learned LAS score or success probability. "+t.unknown_without_surface_hit+" unknown cells have no 3D surface marker.";
+    const gapNote=d.metadata.terrain_feature==="gap"?" The designed gap appears gray where rays miss; a miss alone is not proof of a physical gap.":"";
+    document.getElementById("traversability-note").textContent=t.mode+" · geometry only, not a learned LAS score or success probability. "+t.unknown_without_surface_hit+" unknown cells have no 3D surface marker."+gapNote;
   }
-  document.getElementById("source").textContent="Source: "+d.source+"; "+d.resolution_m+" m/cell; "+(d.metadata.live_step===undefined?"offline scenario":"simulation step "+d.metadata.live_step)+". Height is world-up elevation in metres. RGB/depth are unavailable.";
+  const tile=d.metadata.terrain_feature?"; current showcase tile: "+d.metadata.terrain_feature:"";
+  document.getElementById("terrain-feature").textContent=d.metadata.terrain_scene==="showcase"?
+    "Visible tiles: rough ground · stairs · square gap | Robot scanning: "+d.metadata.terrain_feature:"";
+  document.getElementById("source").textContent="Source: "+d.source+"; "+d.resolution_m+" m/cell; "+(d.metadata.live_step===undefined?"offline scenario":"simulation step "+d.metadata.live_step)+tile+". Height is world-up elevation in metres. RGB/depth are unavailable.";
   const f=d.reasoning.features, ft=document.getElementById("features");
   const labels={ahead_valid_fraction:"Observed support ahead",ahead_traversable_fraction:"Traversable ahead",ahead_unknown_fraction:"Unknown ahead",ahead_gap_fraction:"Known gap ahead",obstacle_height_m:"Highest relative rise",max_slope_deg:"Maximum measured slope",max_roughness_m:"Maximum local roughness",landing_region_sufficient:"Landing strip",base_speed_mps:"Base speed"};
   const units={obstacle_height_m:" m",max_slope_deg:"°",max_roughness_m:" m",base_speed_mps:" m/s"};
@@ -78,6 +83,6 @@ async function refresh(){
   } catch(error){document.getElementById("source").textContent="Waiting for live dashboard server: "+error}
 }
 if(new URLSearchParams(location.search).get("mode")==="live")sel.value="Live Isaac Sim";
-sel.addEventListener("change",refresh);refresh();
-setInterval(()=>{if(sel.value==="Live Isaac Sim")refresh()},500);
+sel.addEventListener("change",refresh);
+if(window.__cra373Snapshot){render(window.__cra373Snapshot)}else{refresh();setInterval(()=>{if(sel.value==="Live Isaac Sim")refresh()},500)}
 </script></body></html>

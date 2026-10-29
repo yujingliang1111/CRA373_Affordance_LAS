@@ -69,6 +69,15 @@ def heuristic_traversability(
         ratio(aff.discontinuity_m, capability.max_discontinuity_m),
         np.where(aff.obstacle, ratio(aff.relative_height_m, capability.candidate_step_m), 0.0),
     ))
+    # A measured edge next to an unobserved cell is conditional, not safe.
+    missing = aff.unknown | aff.gap
+    padded = np.pad(missing, 1, constant_values=False)
+    near_missing = np.zeros_like(missing)
+    for dr in range(3):
+        for dc in range(3):
+            if dr != 1 or dc != 1:
+                near_missing |= padded[dr:dr + missing.shape[0], dc:dc + missing.shape[1]]
+    risk = np.where(obs.valid & near_missing, np.maximum(risk, 1.0), risk)
     score = np.clip(1.0 - 0.5 * risk, 0.0, 1.0)
     score[~obs.valid] = np.nan
     category = np.full(obs.valid.shape, GRAY, dtype=np.int32)

@@ -1,0 +1,68 @@
+[LIVE] Dashboard selected available port 39531
+The '--headless' CLI argument is deprecated. Omit '--viz' for default headless. If config visualizers are enabled and you want to force headless, use '--viz none'.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1793259698.854053   72054 descriptor_database.cc:633] File already exists in database: grpc/health/v1/health.proto
+W0000 00:00:1793259698.854083   72054 message.cc:301] Protobuf GeneratedMessageFactory: File is already registered: grpc/health/v1/health.proto
+[ISAACLAB] AppLauncher initialization complete
+[LIVE] Viewport markers disabled: no Kit GUI; dashboard analysis remains active
+[INFO]: Base environment:
+	Environment device    : cuda:0
+	Environment seed      : 373
+	Physics step-size     : 0.005
+	Rendering step-size   : 0.02
+	Environment step-size : 0.02
+[INFO]: Registered backend 'physx' for factory Articulation.
+[INFO]: Registered backend 'physx' for factory ContactSensor.
+[INFO]: Registered backend 'physx' for factory RayCaster.
+[INFO] Generating terrains randomly took Last: 0.048074 s
+[INFO]: Time taken for scene creation Last: 0.188146 s, Mean: 0.188146 s, Std: 0.000000 s, N: 1
+[INFO]: Scene manager:  <class InteractiveScene>
+	Number of environments: 1
+	Environment spacing   : 3.0
+	Source prim name      : /World/envs/env_0
+	Global prim paths     : []
+	Replicate physics     : True
+[INFO]: Starting the simulation. This may take a few seconds. Please wait...
+[INFO]: Simulation parameters for joints in /World/envs/env_.*/Robot:
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                                  Simulation Joint Information (Prim path: /World/envs/env_.*/Robot)                                                 |
++-------+----------------+-----------+---------+----------+-----------------+------------------+------------------+-----------------+-----------------+---------------+
+| Index | Name           | Stiffness | Damping | Armature | Static Friction | Dynamic Friction | Viscous Friction | Position Limits | Velocity Limits | Effort Limits |
++-------+----------------+-----------+---------+----------+-----------------+------------------+------------------+-----------------+-----------------+---------------+
+|   0   | FL_hip_joint   |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 1.571] |      20.000     |     30.000    |
+|   1   | FR_hip_joint   |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 1.571] |      20.000     |     30.000    |
+|   2   | RL_hip_joint   |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 1.571] |      20.000     |     30.000    |
+|   3   | RR_hip_joint   |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 1.571] |      20.000     |     30.000    |
+|   4   | FL_thigh_joint |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 0.785] |      20.000     |     30.000    |
+|   5   | FR_thigh_joint |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 0.785] |      20.000     |     30.000    |
+|   6   | RL_thigh_joint |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 0.785] |      20.000     |     30.000    |
+|   7   | RR_thigh_joint |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.571, 0.785] |      20.000     |     30.000    |
+|   8   | FL_calf_joint  |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.082, 1.082] |      20.000     |     30.000    |
+|   9   | FR_calf_joint  |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.082, 1.082] |      20.000     |     30.000    |
+|   10  | RL_calf_joint  |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.082, 1.082] |      20.000     |     30.000    |
+|   11  | RR_calf_joint  |   25.000  |  0.500  |  0.000   |      0.000      |      0.000       |      0.000       | [-1.082, 1.082] |      20.000     |     30.000    |
++-------+----------------+-----------+---------+----------+-----------------+------------------+------------------+-----------------+-----------------+---------------+
+[INFO]: Read mesh prim: /World/ground/terrain/mesh with 57120 vertices and 345624 faces.
+[INFO]: Time taken for simulation start Last: 0.710910 s, Mean: 0.710910 s, Std: 0.000000 s, N: 1
+[INFO] Event Manager:  <EventManager> contains 1 active terms.
++--------------------------------------+
+| Active Event Terms in Mode: 'startup' |
++----------+---------------------------+
+|  Index   | Name                      |
++----------+---------------------------+
+|    0     | physics_material          |
+|    1     | add_base_mass             |
++----------+---------------------------+
+
+[INFO]: Completed setting up the environment...
+[LIVE] Isaac Sim viewport and terrain dashboard: http://127.0.0.1:39531/?mode=live
+[LIVE] Neutral joint-offset control
+[LIVE] step=5 valid=187/187 terrain=rough recommendation=Avoid markers=0 heuristic_classes=[16, 149, 22, 0]
+[INFO]: SimulationContext cleared
+Loading user config located at: '/home/dog101/miniconda3/envs/env_isaaclab_2/lib/python3.12/site-packages/isaacsim/kit/data/Kit/IsaacLab/3.0/user.config.json'
+2026-10-29T07:41:38Z [0ms] [Warning] [omni.ext.plugin] [ext: isaaclab_visualizers] Extensions config 'extension.toml' doesn't exist '/home/dog101/IsaacLab/source/isaaclab_visualizers' or '/home/dog101/IsaacLab/source/isaaclab_visualizers/config'
+2026-10-29T07:41:39Z [244ms] [Warning] [omni.usd_config.extension] Enable omni.materialx.libs extension to use MaterialX
+2026-10-29T07:41:40Z [2,008ms] [Warning] [isaacsim.core.simulation_manager.plugin] USD stage is not available; stage-opened subscription is deferred
+2026-10-29T07:41:40Z [2,008ms] [Warning] [isaacsim.core.simulation_manager.plugin] USD stage is not available; stage-opened subscription is deferred
+2026-10-29T07:41:42Z [3,954ms] [Warning] [isaaclab_physx.physics.physx_manager] TGS solver with enable_external_forces_every_iteration=False may cause noisy velocities.
+2026-10-29T07:41:43Z [4,726ms] [Warning] [usdrt.population.plugin] Last global time was not created. Did you call setEnableUsdNoticeHandling?

@@ -54,6 +54,7 @@ class TraversabilityVizTests(unittest.TestCase):
         aff = estimate_affordance(obs)
         frame = make_marker_frame(obs, aff)
         self.assertEqual(frame.grid_categories[2, 2], GRAY)
+        self.assertEqual(frame.grid_categories[2, 1], YELLOW)
         self.assertEqual(frame.unknown_count, 1)
         self.assertEqual(frame.undrawn_unknown_count, 1)
         self.assertEqual(len(frame.positions_w_m), 24)
