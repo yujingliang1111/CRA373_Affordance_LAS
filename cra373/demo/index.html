@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRA373 Terrain Affordance Lab</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#17202a;background:#eef3f5}body{max-width:1200px;margin:auto;padding:24px}h1{margin:0}header p{color:#53616c}select{font:inherit;padding:8px;border-radius:6px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{background:white;border-radius:12px;padding:18px;box-shadow:0 1px 5px #bac5cb}.wide{grid-column:span 2}canvas{width:100%;max-width:390px;image-rendering:pixelated;border:1px solid #c5d0d5}table{border-collapse:collapse;width:100%}td,th{padding:7px;border-bottom:1px solid #e4e9ec;text-align:left}tr.selected{background:#dff1e4}.muted{color:#64727b}.legend span{display:inline-block;margin:4px 10px 4px 0}.swatch{width:12px;height:12px;display:inline-block;margin-right:5px}pre{white-space:pre-wrap;font:inherit}@media(max-width:760px){.grid{grid-template-columns:1fr}.wide{grid-column:span 1}}
+</style></head><body>
+<header><h1>CRA373 Terrain Affordance Lab</h1><p>Geometry-based scanner reasoning • synthetic offline scenes • no trained LAS model</p>
+<label>Terrain scenario <select id="scenario"><option>Live Isaac Sim</option><option>Flat</option><option>Rough</option><option>Raised step</option><option>Known gap</option></select></label>
+<p class="muted">Grid: +x forward (up), +y left. Cell size 0.1 m. Heuristic thresholds require CRA373 validation.</p></header>
+<main class="grid">
+<section class="card"><h2>1 · Terrain observation</h2><canvas id="height" width="330" height="510"></canvas><p id="source" class="muted"></p></section>
+<section class="card"><h2>2 · Affordance grounding</h2><canvas id="affordance" width="330" height="510"></canvas><p class="legend"><span><i class="swatch" style="background:#25a55b"></i>Foothold</span><span><i class="swatch" style="background:#9dd5ac"></i>Traversable</span><span><i class="swatch" style="background:#f5a623"></i>Obstacle / transition</span><span><i class="swatch" style="background:#9b49ad"></i>Known gap</span><span><i class="swatch" style="background:#697680"></i>Unknown</span></p></section>
+<section class="card"><h2>3 · Terrain reasoning</h2><table id="features"></table><p id="explanation"></p><p id="uncertainty" class="muted"></p><p id="constraints" class="muted"></p></section>
+<section class="card"><h2>4 · Action feasibility</h2><p class="muted">Scores are uncalibrated heuristics. “Supported” means a category exists, not validated terrain execution.</p><table id="actions"></table><h3 id="recommendation"></h3></section>
+<section class="card wide" id="traversability-card" style="display:none"><h2>5 · Heuristic Traversability Mode</h2><canvas id="traversability" width="330" height="510"></canvas><p class="legend"><span><i class="swatch" style="background:#15d933"></i>Green ≥ 0.7</span><span><i class="swatch" style="background:#ffb80f"></i>Yellow ≥ 0.4</span><span><i class="swatch" style="background:#f21a17"></i>Red &lt; 0.4</span><span><i class="swatch" style="background:#8c949f"></i>Gray unknown</span></p><p id="traversability-note" class="muted"></p></section>
+<section class="card wide"><h2>6 · Latent action space</h2><p id="las"></p><p class="muted">No random latent vector is shown. A paired PPO action dataset, trained autoencoder and affordance mapper are required.</p><p id="latency"></p></section>
+</main>
+<script>
+const sel=document.getElementById("scenario");
+function draw(canvasId, data, colors) {
+  const c=document.getElementById(canvasId), ctx=c.getContext("2d"), rows=data.length, cols=data[0].length;
+  const w=c.width/cols,h=c.height/rows;
+  for(let r=0;r<rows;r++)for(let col=0;col<cols;col++){
+    ctx.fillStyle=colors(data[r][col],r,col);
+    ctx.fillRect(col*w,(rows-1-r)*h,w+1,h+1);
+  }
+}
+function cell(m,k,r,c){return Boolean(m[k][r][c])}
+function render(d){
+  const h=d.height_m, m=d.maps, vals=h.flat().filter(v=>v!==null), low=Math.min(...vals),high=Math.max(...vals);
+  draw("height",h,(v)=>{if(v===null)return "#52616b";const t=(v-low)/(high-low||1);return "hsl("+(195-160*t)+",55%,"+(73-25*t)+"%)"});
+  draw("affordance",h,(_,r,c)=>{
+    if(cell(m,"gap",r,c))return "#9b49ad";
+    if(cell(m,"unknown",r,c))return "#697680";
+    if(cell(m,"obstacle",r,c)||cell(m,"transition",r,c))return "#f5a623";
+    if(cell(m,"foothold",r,c))return "#25a55b";
+    if(cell(m,"traversable",r,c))return "#9dd5ac";
+    return "#d75b5b";
+  });
+  const t=d.traversability, tcard=document.getElementById("traversability-card");
+  tcard.style.display=t?"block":"none";
+  if(t){
+    const colors=["#15d933","#ffb80f","#f21a17","#8c949f"];
+    draw("traversability",t.categories,(v)=>colors[v]||colors[3]);
+    document.getElementById("traversability-note").textContent=t.mode+" · geometry only, not a learned LAS score or success probability. "+t.unknown_without_surface_hit+" unknown cells have no 3D surface marker.";
+  }
+  document.getElementById("source").textContent="Source: "+d.source+"; "+d.resolution_m+" m/cell; "+(d.metadata.live_step===undefined?"offline scenario":"simulation step "+d.metadata.live_step)+". Height is world-up elevation in metres. RGB/depth are unavailable.";
+  const f=d.reasoning.features, ft=document.getElementById("features");
+  const labels={ahead_valid_fraction:"Observed support ahead",ahead_traversable_fraction:"Traversable ahead",ahead_unknown_fraction:"Unknown ahead",ahead_gap_fraction:"Known gap ahead",obstacle_height_m:"Highest relative rise",max_slope_deg:"Maximum measured slope",max_roughness_m:"Maximum local roughness",landing_region_sufficient:"Landing strip",base_speed_mps:"Base speed"};
+  const units={obstacle_height_m:" m",max_slope_deg:"°",max_roughness_m:" m",base_speed_mps:" m/s"};
+  ft.replaceChildren();
+  for(const [k,label] of Object.entries(labels)){
+    let v=f[k], shown=v===null?"unavailable":typeof v==="boolean"?(v?"sufficient":"not established"):typeof v==="number"?v.toFixed(3)+(units[k]||""):v;
+    const tr=ft.insertRow();tr.insertCell().textContent=label;tr.insertCell().textContent=shown;
+  }
+  document.getElementById("explanation").textContent=d.reasoning.explanation;
+  document.getElementById("uncertainty").textContent=d.reasoning.uncertainty.join(" ");
+  const robot=d.reasoning.capability_constraints.robot;
+  document.getElementById("constraints").textContent=Object.keys(robot.joint_limits_rad).length+" joint limits read from CRA373 URDF; body dimensions, leg reach, tilt and dynamic step limit remain unvalidated.";
+  const at=document.getElementById("actions");at.replaceChildren();
+  const head=at.insertRow();for(const s of ["Action","Heuristic","Execution"])head.insertCell().textContent=s;
+  for(const a of d.reasoning.actions){const tr=at.insertRow();if(a.action===d.reasoning.selected_action)tr.className="selected";
+    for(const s of [a.action,a.heuristic_score===null?"Not evaluated":a.heuristic_score.toFixed(2),a.execution_supported?"Interface available":"Unsupported"])tr.insertCell().textContent=s;
+    tr.title=a.reason;
+  }
+  document.getElementById("recommendation").textContent="Recommendation: "+d.reasoning.selected_action;
+  document.getElementById("las").textContent=d.las.status;
+  document.getElementById("latency").textContent="Measured Python pipeline latency: "+d.latency_ms.total.toFixed(2)+" ms (geometry "+d.latency_ms.affordance.toFixed(2)+", reasoning "+d.latency_ms.reasoning.toFixed(2)+"). Excludes simulation and browser rendering.";
+}
+async function refresh(){
+  const live=sel.value==="Live Isaac Sim";
+  const endpoint=live?"/api/live":"/api/scenario?name="+encodeURIComponent(sel.value);
+  try {
+    const response=await fetch(endpoint,{cache:"no-store"});
+    const data=await response.json();
+    if(data.status==="waiting"){document.getElementById("source").textContent=data.message;return}
+    render(data);
+  } catch(error){document.getElementById("source").textContent="Waiting for live dashboard server: "+error}
+}
+if(new URLSearchParams(location.search).get("mode")==="live")sel.value="Live Isaac Sim";
+sel.addEventListener("change",refresh);refresh();
+setInterval(()=>{if(sel.value==="Live Isaac Sim")refresh()},500);
+</script></body></html>

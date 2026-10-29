@@ -1,0 +1,2 @@
+[LIVE] Dashboard port 7860 is busy; using 7861
+The '--headless' CLI argument is deprecated. Omit '--viz' for default headless. If config visualizers are enabled and you want to force headless, use '--viz none'.
